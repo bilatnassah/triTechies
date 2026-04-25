@@ -49,7 +49,7 @@ export function Navbar() {
           isVisible ? "translate-y-0" : "-translate-y-[150%]"
         )}
       >
-        <nav className="pointer-events-auto flex items-center justify-between px-6 py-3.5 rounded-full bg-slate-900/70 dark:bg-black/60 backdrop-blur-xl border border-white/10 shadow-2xl w-full max-w-5xl transition-all duration-300">
+        <nav className="pointer-events-auto flex items-center justify-between px-6 py-3.5 rounded-full bg-[#05070f]/95 bg-[radial-gradient(circle_at_72%_80%,rgba(139,92,246,0.20),transparent_35%),radial-gradient(circle_at_28%_20%,rgba(59,130,246,0.16),transparent_34%)] backdrop-blur-xl border border-white/10 shadow-2xl w-full max-w-5xl transition-all duration-300">
           
           <Link href="/" className="text-xl font-black text-white tracking-tighter hover:opacity-80 transition-opacity">
             <span className="text-accent-light">tri</span>Techies.
@@ -90,7 +90,7 @@ export function Navbar() {
 
       {/* Mobile Nav Dropdown */}
       {isOpen && (
-        <div className="md:hidden fixed top-24 left-4 right-4 z-40 rounded-3xl bg-slate-900/90 dark:bg-black/90 backdrop-blur-xl border border-white/10 px-6 py-6 flex flex-col gap-4 shadow-2xl">
+        <div className="md:hidden fixed top-24 left-4 right-4 z-40 rounded-3xl bg-[#05070f]/95 bg-[radial-gradient(circle_at_72%_80%,rgba(139,92,246,0.20),transparent_35%),radial-gradient(circle_at_28%_20%,rgba(59,130,246,0.16),transparent_34%)] backdrop-blur-xl border border-white/10 px-6 py-6 flex flex-col gap-4 shadow-2xl">
           {links.map((link) => (
             <Link 
               key={link.href} 

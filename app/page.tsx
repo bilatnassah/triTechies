@@ -12,7 +12,8 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center w-full overflow-hidden">
+    <div className="relative flex flex-col min-h-screen items-center justify-center w-full overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.16),transparent_32%),radial-gradient(circle_at_30%_22%,rgba(59,130,246,0.14),transparent_34%)]" />
       <Hero />
       <Services />
       <Work />

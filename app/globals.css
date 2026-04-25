@@ -18,28 +18,36 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #05070f;
+  --foreground: #f1f5f9;
 }
 
 .dark {
-  --background: #0b1120;
-  --foreground: #f8fafc;
-  --color-brand-50: #0f172a;
-  --color-brand-100: #1e293b;
-  --color-brand-200: #334155;
-  --color-brand-300: #475569;
-  --color-brand-400: #64748b;
-  --color-brand-500: #94a3b8;
+  --background: #05070f;
+  --foreground: #f1f5f9;
+  --color-brand-50: #101827;
+  --color-brand-100: #1a2437;
+  --color-brand-200: #233149;
+  --color-brand-300: #31435f;
+  --color-brand-400: #50617d;
+  --color-brand-500: #7f8faa;
 }
 
 body {
   background-color: var(--background);
+  background-image: none;
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.5s ease-in-out;
+}
+
+::selection {
+  background: #f59e0b;
+  color: #111827;
 }
 
 /* Custom utilities */
@@ -59,4 +67,13 @@ body {
 
 @utility bg-gradient-brand {
   background: linear-gradient(to bottom right, var(--color-brand-50), var(--color-brand-400));
+}
+
+.section-envelope {
+  position: relative;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 2rem;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.52) 0%, rgba(15, 23, 42, 0.22) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }

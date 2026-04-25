@@ -1,23 +1,23 @@
 "use server";
 
-import { put } from '@vercel/blob';
+import { put } from "@vercel/blob";
 
 export async function uploadImageAction(formData: FormData) {
   try {
-    const file = formData.get('file') as File;
-    
+    const file = formData.get("file") as File;
+
     if (!file) {
       throw new Error("No file provided");
     }
 
     const maxFileSize = 5 * 1024 * 1024; // 5MB limits
     if (file.size > maxFileSize) {
-        throw new Error("File size exceeds 5MB limit.");
+      throw new Error("File size exceeds 5MB limit.");
     }
 
     // Upload exactly to vercel blob using the environment token automatically
     const blob = await put(file.name, file, {
-      access: 'public',
+      access: "public",
     });
 
     return { success: true, url: blob.url };

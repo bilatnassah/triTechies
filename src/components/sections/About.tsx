@@ -5,7 +5,7 @@ import { ArrowRight, Phone } from "lucide-react";
 
 export function About() {
   return (
-    <section className="py-32 px-6 w-full relative overflow-hidden transition-colors duration-500">
+    <section className="pt-36 md:pt-40 pb-24 md:pb-28 px-6 w-full relative overflow-hidden transition-colors duration-500">
       {/* Futuristic Background Accents */}
       <div className="absolute top-[20%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-brand-200 blur-[150px] opacity-[0.15] mix-blend-screen pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-accent-dark blur-[150px] opacity-[0.1] mix-blend-screen pointer-events-none" />
@@ -15,10 +15,10 @@ export function About() {
           
           <div className="lg:col-span-5 relative">
             <FadeIn>
-              <div className="inline-flex items-center rounded-full border border-accent-light/30 bg-white/50 dark:bg-slate-800/50 px-3 py-1 text-sm font-medium text-accent-dark dark:text-accent-light mb-6 glass">
+              <div className="inline-flex items-center rounded-full border border-accent-light/45 bg-slate-900/90 px-5 py-2 text-sm font-semibold text-accent-light mb-8 shadow-lg shadow-black/30">
                 ⚡ THE VISION
               </div>
-              <h2 className="text-5xl md:text-7xl font-black text-slate-800 dark:text-white tracking-tighter leading-[0.9] mb-8">
+              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.9] mb-8">
                 Build <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-dark to-accent-light">Systems.</span><br />
                 Not Pages.
@@ -28,11 +28,11 @@ export function About() {
 
           <div className="lg:col-span-7 flex flex-col gap-8">
             <FadeIn delay={0.2}>
-              <div className="relative pl-8 md:pl-12 border-l-4 border-accent-dark/30">
-                <h3 className="text-2xl md:text-4xl font-bold mb-4 text-slate-800 dark:text-white leading-tight">
+              <div className="relative pl-8 md:pl-12 border-l-2 border-accent-light/40">
+                <h3 className="text-2xl md:text-4xl font-bold mb-4 text-white leading-tight">
                   Technology should make your life <span className="text-accent-dark">easier</span> — not more complicated.
                 </h3>
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+                <p className="text-lg md:text-xl text-slate-300 font-medium leading-relaxed">
                   We don’t chase fleeting digital trends or build pretty pages that do nothing. We architect raw, high-performance engines that automate growth, secure data, and actively solve real-world problems.
                 </p>
               </div>
@@ -40,15 +40,15 @@ export function About() {
             
             <FadeIn delay={0.3}>
               <div className="grid grid-cols-2 gap-6 mt-4">
-                <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-800">
+                <div className="bg-[#05070f]/95 p-6 rounded-3xl border border-white/10 shadow-xl">
                    <div className="text-3xl font-black text-accent-dark mb-2">01</div>
-                   <h4 className="text-lg font-bold text-slate-800 dark:text-white mb-2">Automate Reality</h4>
-                   <p className="text-sm text-slate-500 font-medium">Replace manual labor with flawless automated pipelines.</p>
+                   <h4 className="text-lg font-bold text-white mb-2">Automate Reality</h4>
+                   <p className="text-sm text-slate-300 font-medium">Replace manual labor with flawless automated pipelines.</p>
                 </div>
-                <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-800">
+                <div className="bg-[#05070f]/95 p-6 rounded-3xl border border-white/10 shadow-xl">
                    <div className="text-3xl font-black text-accent-dark mb-2">02</div>
-                   <h4 className="text-lg font-bold text-slate-800 dark:text-white mb-2">Scale Infinitely</h4>
-                   <p className="text-sm text-slate-500 font-medium">Architectures designed to never bottleneck your traffic.</p>
+                   <h4 className="text-lg font-bold text-white mb-2">Scale Infinitely</h4>
+                   <p className="text-sm text-slate-300 font-medium">Architectures designed to never bottleneck your traffic.</p>
                 </div>
               </div>
             </FadeIn>

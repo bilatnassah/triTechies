@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { Monitor, Smartphone, AppWindow, Palette, Code2 } from "lucide-react";
 import { FadeIn } from "@/components/animations/FadeIn";
 
@@ -38,99 +38,74 @@ const services = [
   },
 ];
 
-const CardStack = ({ service, index, total }: { service: any, index: number, total: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  // Track scroll position exclusively for this card's segment in the viewport
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "start start"]
-  });
-  
-  // When the card above it scrolls down, this current card will push back in 3D space
-  const scrollYLeaveProgress = useScroll({
-    target: cardRef,
-    offset: ["start start", "end start"]
-  }).scrollYProgress;
+type ServiceItem = (typeof services)[number];
 
-  // 3D Math Logic
-  const scale = useTransform(scrollYLeaveProgress, [0, 1], [1, 0.9 - (index * 0.05)]);
-  const opacity = useTransform(scrollYLeaveProgress, [0, 1], [1, 0.3]);
-  const yOffset = useTransform(scrollYProgress, [0, 1], [100, 0]);
-  const rotateX = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  
+const EnvelopeCard = ({ service, index }: { service: ServiceItem; index: number }) => {
+  const scatterX = index % 2 === 0 ? -24 : 24;
+  const scatterY = index % 3 === 0 ? 18 : -18;
+
   return (
-    <motion.div
-      ref={cardRef}
-      style={{
-        scale,
-        opacity,
-        y: yOffset,
-        rotateX,
-        top: `calc(15vh + ${index * 30}px)`, 
-        transformOrigin: "top center",
-      }}
-      className="sticky w-full origin-top"
-    >
-      <div className="w-full max-w-5xl mx-auto min-h-[40vh] bg-white/70 dark:bg-slate-900/60 backdrop-blur-2xl border-t border-x border-slate-200 dark:border-slate-800 rounded-t-[3rem] shadow-2xl p-10 md:p-16 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">
-         
-         {/* Sub-Card Glow Accent */}
-         <div className={`absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br ${service.color} blur-[120px] opacity-20 pointer-events-none rounded-full`} />
-
-         <div className="flex-1 order-2 md:order-1 relative z-10">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-xl font-black text-slate-300 dark:text-slate-700">0{index + 1}</span>
-              <div className="w-12 h-1 bg-accent-light rounded-full" />
+    <FadeIn delay={index * 0.08} className="h-full">
+      <motion.article
+        initial={{
+          opacity: 0,
+          scale: 0.72,
+          x: scatterX,
+          y: scatterY,
+          rotate: index % 2 === 0 ? -6 : 6,
+          borderRadius: 999,
+        }}
+        whileInView={{
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          y: 0,
+          rotate: 0,
+          borderRadius: 24,
+        }}
+        viewport={{ once: false, amount: 0.22 }}
+        whileHover={{ y: -6, scale: 1.01 }}
+        transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
+        className="relative h-full overflow-hidden rounded-3xl bg-slate-900/65 p-6 md:p-7 shadow-xl"
+      >
+        <div className={`absolute -top-24 -right-20 h-48 w-48 bg-gradient-to-br ${service.color} opacity-20 blur-3xl`} />
+        <div className="absolute left-5 top-0 h-4 w-20 -translate-y-1/2 rounded-b-xl bg-slate-800/95" />
+        <div className="relative z-10">
+          <div className="mb-5 flex items-center justify-between">
+            <span className="text-xs font-black tracking-[0.18em] text-slate-400">0{index + 1}</span>
+            <div className="rounded-full bg-slate-800/80 p-3">
+              {React.cloneElement(service.icon, { className: "h-5 w-5 text-accent-light" })}
             </div>
-            <h3 className="text-4xl md:text-5xl font-black mb-6 text-slate-800 dark:text-white tracking-tight leading-[1.1]">
-              {service.title}
-            </h3>
-            <p className="text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed max-w-2xl">
-              {service.description}
-            </p>
-         </div>
-
-         <div className="order-1 md:order-2 w-40 h-40 md:w-64 md:h-64 flex-shrink-0 flex items-center justify-center relative z-10">
-            <div className="absolute inset-0 bg-white/10 dark:bg-slate-800/20 backdrop-blur-xl rounded-full shadow-2xl flex items-center justify-center border-4 border-white/40 dark:border-white/10 transform transition-transform duration-700 hover:rotate-12 hover:scale-105">
-               {React.cloneElement(service.icon, { className: "w-16 h-16 md:w-28 md:h-28 text-slate-800 dark:text-slate-100 stroke-[1.5px]" })}
-               <div className={`absolute inset-0 bg-gradient-to-br ${service.color} mix-blend-overlay opacity-30 rounded-full pointer-events-none`} />
-            </div>
-         </div>
-         
-      </div>
-    </motion.div>
+          </div>
+          <h3 className="mb-3 text-2xl font-black tracking-tight text-white">{service.title}</h3>
+          <p className="text-sm leading-relaxed text-slate-300">{service.description}</p>
+        </div>
+      </motion.article>
+    </FadeIn>
   );
 };
 
 export function Services() {
   return (
-    <section className="py-32 w-full relative overflow-hidden transition-colors duration-500">
-      
-      {/* Background Ambience */}
-      <div className="absolute top-[20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-accent-dark blur-[150px] opacity-[0.1] mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-brand-200 blur-[150px] opacity-[0.12] mix-blend-screen pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-6 relative z-20">
+    <section className="py-28 w-full relative isolate overflow-hidden bg-transparent transition-colors duration-500">
+      <div className="max-w-6xl mx-auto px-6 relative z-20 py-14 md:py-16">
         <FadeIn>
-          <div className="flex flex-col items-center justify-center text-center mb-24 pt-8">
-            <div className="inline-flex items-center rounded-full border border-accent-light/30 bg-white/50 dark:bg-slate-800/50 px-3 py-1 text-sm font-medium text-accent-dark dark:text-accent-light mb-8 glass">
+          <div className="flex flex-col items-center justify-center text-center mb-14">
+            <div className="inline-flex items-center rounded-full border border-accent-light/45 bg-slate-900/90 px-5 py-2 text-sm font-semibold text-accent-light mb-8 shadow-lg shadow-black/30">
               ⚡ OUR ARSENAL
             </div>
-            <div className="bg-white/10 dark:bg-slate-900/40 backdrop-blur-3xl border border-white/20 dark:border-white/5 p-10 md:p-14 rounded-[3rem] shadow-2xl max-w-3xl">
-               <h2 className="text-5xl md:text-7xl font-black text-slate-800 dark:text-white tracking-tighter leading-[1.1]">
-                 Engineered <br/> Solutions.
-               </h2>
-            </div>
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-[1.1]">
+              Engineered Solutions <br />
+            </h2>
           </div>
         </FadeIn>
-      </div>
 
-      <div className="relative w-full pb-[20vh] px-4 md:px-10" style={{ perspective: "1500px" }}>
-        {services.map((svc, idx) => (
-           <CardStack key={idx} service={svc} index={idx} total={services.length} />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-5 md:px-8">
+          {services.map((service, idx) => (
+            <EnvelopeCard key={service.title} service={service} index={idx} />
+          ))}
+        </div>
       </div>
-
     </section>
   );
 }

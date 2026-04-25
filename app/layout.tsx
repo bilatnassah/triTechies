@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/ui/Navbar";
+import { FirstVisitPopup } from "@/components/ui/FirstVisitPopup";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fcfefd",
+  themeColor: "#0b1120",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -34,15 +35,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={cn(inter.variable, "antialiased selection:bg-accent-light/30 overflow-x-hidden flex flex-col min-h-screen bg-background text-foreground")}>
+      <body className={cn(inter.variable, "antialiased overflow-x-hidden flex flex-col min-h-screen bg-background text-foreground pb-20 md:pb-0")}>
         <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
+        <FirstVisitPopup />
       </body>
     </html>
   );
 }
-
-
-

@@ -79,20 +79,18 @@ export function Work({ limit = 6 }: { limit?: number | null }) {
   const displayedProjects = limit ? projects.slice(0, limit) : projects;
 
   return (
-    <section className="py-24 px-6 w-full relative overflow-hidden transition-colors duration-500">
-      <div className="absolute bottom-[-20%] left-[-20%] w-[50vw] h-[50vw] rounded-full bg-accent-light blur-3xl opacity-10 pointer-events-none" />
-      
+    <section className="py-24 px-6 w-full relative overflow-hidden bg-transparent transition-colors duration-500">
       <div className="max-w-7xl mx-auto relative z-10">
         <FadeIn>
           <div className="text-center mb-16">
-            <div className="inline-flex items-center rounded-full border border-accent-light/30 bg-white/50 dark:bg-slate-800/50 px-3 py-1 text-sm font-medium text-accent-dark dark:text-accent-light mb-4 glass">
+            <div className="inline-flex items-center rounded-full border border-accent-light/45 bg-slate-900/90 px-5 py-2 text-sm font-semibold text-accent-light mb-4 shadow-lg shadow-black/30">
               💼 OUR WORK
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground-primary dark:text-white">
               We don’t just deliver projects. <br/>
               <span className="text-gradient">We remove problems.</span>
             </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-medium">
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto font-medium">
               👉 Real results. Real impact.
             </p>
           </div>
@@ -112,7 +110,6 @@ export function Work({ limit = 6 }: { limit?: number | null }) {
                     description={project.description}
                     url={project.url}
                     tags={project.tags || []}
-                    imageUrl={project.imageUrl}
                   />
                 </FadeIn>
               ))}
